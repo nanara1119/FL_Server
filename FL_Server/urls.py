@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.index),
     path('index', views.index),
     path('admin/', admin.site.urls),
+    path('round', views.round),
     path('weight', views.weight),
     path('weight/', views.weight)
 ]

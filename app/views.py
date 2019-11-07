@@ -17,6 +17,10 @@ def index(request):
     logger.info("request index")
     return HttpResponse("index ok", status.HTTP_200_OK)
 
+@api_view(['GET'])
+def round(request):
+    logger.info("request round")
+    return HttpResponse(FederatedServer.get_current_count(), status.HTTP_200_OK)
 
 @api_view(['GET', 'PUT'])
 def weight(request):

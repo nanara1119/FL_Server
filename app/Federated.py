@@ -14,7 +14,7 @@ class FederatedServer:
         cls.current_count += 1
 
         if cls.current_count % cls.max_count == 0:
-            cls.current_count = 0
+            #cls.current_count = 0
             cls.avg()
         else:
             cls.local_weights.append(local_weight)
@@ -34,7 +34,12 @@ class FederatedServer:
 
         cls.global_weight = np.divide(cls.global_weight, cls.max_count) #   평균 계산
         cls.local_weights = []  #   다음 라운드를 위해 이전의 local weight 리스트 삭제
+        print("global weight update")
 
     @classmethod
     def get_avg(cls):
         return cls.global_weight
+
+    @classmethod
+    def get_current_count(cls):
+        return cls.current_count
