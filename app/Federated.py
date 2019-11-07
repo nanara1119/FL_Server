@@ -1,6 +1,7 @@
-import copy
-
 import numpy as np
+
+import logging
+logger = logging.getLogger(__name__)
 
 class FederatedServer:
     max_count = 10
@@ -18,7 +19,8 @@ class FederatedServer:
         else:
             cls.local_weights.append(local_weight)
 
-        print("update count : {}".format(cls.current_count))
+        logger.info("update count : {}".format(cls.current_count))
+        #print("update count : {}".format(cls.current_count))
 
     @classmethod
     def avg(cls):

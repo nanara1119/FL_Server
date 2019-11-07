@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
-
+import logging
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,8 +25,10 @@ SECRET_KEY = '#9g((d#gni=uy7(%$l@2uyzf5&!kubyh0--x7or&9+h=6$h4b9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+logging.basicConfig(level=logging.INFO,
+                    format = '[%(name)s] [%(asctime)s] [%(levelname)s] : %(message)s',)
 
 # Application definition
 
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'app.apps.AppConfig',
 ]
 

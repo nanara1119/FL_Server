@@ -1,9 +1,6 @@
 import json
 
-import numpy as np
 from django.http import HttpResponse
-from django.shortcuts import render
-
 # Create your views here.
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -11,6 +8,14 @@ from rest_framework.parsers import JSONParser
 
 from app import numpy_encoder
 from app.Federated import FederatedServer
+
+import logging
+logger = logging.getLogger(__name__)
+
+@api_view(['GET'])
+def index(request):
+    logger.info("request index")
+    return HttpResponse("index ok", status.HTTP_200_OK)
 
 
 @api_view(['GET', 'PUT'])
