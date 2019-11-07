@@ -18,28 +18,33 @@ class FederatedServer:
         cls.current_count += 1
 
         if cls.current_count % cls.max_count == 0:
-            #cls.current_count = 0
+            cls.current_count = 0
             cls.current_round += 1
             cls.avg()
-        else
-            cls.local_weights.append(local_weight)
+        else:
+            #temp = np.array(local_weights, dtype=np.float32)
+            cls.local_weights.append(local_weights)
 
-        logger.info("update round : {}, count: {}".format(cls.current_round, cls.current_count))
+        #logger.info("update round : {}, count: {}".format(cls.current_round, cls.current_count))
         #print("update count : {}".format(cls.current_count))
 
     @classmethod
     def avg(cls):
+
         if cls.global_weight is None:
+            #cls.global_weight = cls.local_weights[0]
             cls.global_weight = cls.local_weights.pop(0)
+
+        #print("temp : {}".format(len(cls.local_weights)))
 
         for i in range(len(cls.local_weights)):
             for j in range(len(cls.local_weights[i])):
                 temp = np.array(cls.local_weights[i][j], dtype=np.float32)
                 cls.global_weight[j] += temp
 
-        cls.global_weight = np.divide(cls.global_weight, cls.max_count) #   평균 계산
+        cls.global_weight = np.divide(cls.global_weight, len(cls.local_weights)) #   평균 계산
         cls.local_weights = []  #   다음 라운드를 위해 이전의 local weight 리스트 삭제
-        print("global weight update : {}".format(cls.global_weight))
+        print("global weight update")
 
     @classmethod
     def get_avg(cls):

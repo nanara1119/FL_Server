@@ -14,12 +14,12 @@ logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
 def index(request):
-    logger.info("request index")
+    #logger.info("request index")
     return HttpResponse("index ok", status.HTTP_200_OK)
 
 @api_view(['GET'])
 def round(request):
-    logger.info("request round")
+    #logger.info("request round")
     return HttpResponse(FederatedServer.get_current_round(), status.HTTP_200_OK)
 
 @api_view(['GET', 'PUT'])
@@ -30,11 +30,11 @@ def weight(request):
         return HttpResponse(global_weight_to_json, status.HTTP_200_OK)
 
     elif request.method == 'PUT':
-        print("request PUT weight")
+        #print("request PUT weight")
         json_data = JSONParser().parse(request)
         FederatedServer.update(json_data)
         return HttpResponse("Request PUT OK", status.HTTP_200_OK)
 
     else :
-        print("request OTHER weight")
+        #print("request OTHER weight")
         return HttpResponse("Request OK", status.HTTP_200_OK)
