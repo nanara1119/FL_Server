@@ -39,7 +39,7 @@ class FederatedServer:
 
         for i in range(len(cls.local_weights)):
             for j in range(len(cls.local_weights[i])):
-                temp = np.array(cls.local_weights[i][j], dtype=np.float32)
+                temp = np.array(cls.local_weights[i][j], dtype=np.float64)
                 cls.global_weight[j] += temp
 
         cls.global_weight = np.divide(cls.global_weight, len(cls.local_weights)) #   평균 계산
