@@ -17,12 +17,17 @@ class FederatedServer:
 
     @classmethod
     def update(cls, local_weight):
-        local_avg = copy.deepcopy(local_weight)
-        cls.current_count += 1
 
-        cls.local_weights.append(local_avg)
+        weight_list = []
+        for i in range(4):
+            temp = np.array(local_weight[i], dtype=np.float32)
+            weight_list.append(temp)
+
+        cls.current_count += 1
+        cls.local_weights.append(weight_list)
 
         print("update count : {}, {}".format(cls.current_count, len(cls.local_weights)))
+        #print("tttt : {}".format(weight_list[3]))
 
         if cls.current_count == cls.max_count:
             cls.avg()
@@ -31,7 +36,31 @@ class FederatedServer:
 
     @classmethod
     def avg(cls):
+        temp_list = []
 
+        temp_weight = cls.local_weights.pop()
+        for i in range(4):
+            temp = np.array(temp_weight[i], dtype=np.float32)
+            temp_list.append(temp)
+
+        temp_list = np.array(temp_list)
+        #print("temp 2 : {}, {}, {}, {}, {}, {}".format(len(temp_list), type(temp_list), temp_list[0].shape, temp_list[1].shape, temp_list[2].shape, temp_list[3].shape))
+
+        print("temp : {}".format(len(cls.local_weights)))
+        for i in range(len(cls.local_weights)):
+            for j in range(len(cls.local_weights[i])):
+                temp = np.array(cls.local_weights[i][j], dtype=np.float32)
+                temp_list[j] += temp
+
+
+        cls.global_weight = np.divide(temp_list, cls.max_count)
+        #cls.global_weight = temp_list / 10
+        #print("ttt : {}, {}".format(type(cls.global_weight), cls.global_weight.shape))
+        cls.local_weights = []
+
+        #print("update global weight : {}".format(cls.global_weight[3]))
+
+        '''
         if cls.global_weight is None:
             print("avg None")
             cls.global_weight = cls.local_weights[0]
@@ -47,6 +76,7 @@ class FederatedServer:
 
         cls.local_weights = []  # 다음 라운드를 위해 이전의 local weight 리스트 삭제
         print("global weight update : global round : {}".format(cls.current_round))
+        '''
 
     @classmethod
     def get_avg(cls):
