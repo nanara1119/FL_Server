@@ -1,4 +1,4 @@
-# FL_Server
+# Federated Learning - Server
 
 # 배포방법
 Beanstalk, zip파일 배포 
