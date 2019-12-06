@@ -3,6 +3,18 @@
 # 배포방법
 Beanstalk, zip파일 배포 
 
+# install
+1. install Python 3.7<br> 
+2. pip install --user virtualenv<br>
+3. python -m venv ./venv<br>
+4. .\venv\Scripts\activate<br>
+5. pip install -r requirements.txt<br>
+
+# 실행
+1. python manage.py runserver
+2. http://127.0.0.1:8000/
+3. show "index ok"
+ 
 # zip 파일 생성
 포함 파일
 <ol>
