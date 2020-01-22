@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
 def index(request):
-    #logger.info("request index")
+    logger.info("request index")
     return HttpResponse("index ok", status.HTTP_200_OK)
 
 @api_view(['GET'])

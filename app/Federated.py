@@ -31,6 +31,9 @@ class FederatedServer:
             cls.avg()
             cls.current_count = 0
             cls.current_round += 1
+            logger.info("----------------------------------------")
+            logger.info("current round : {}".format(cls.current_round))
+            logger.info("----------------------------------------")
 
     @classmethod
     def avg(cls):
