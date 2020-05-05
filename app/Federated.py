@@ -6,7 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 class FederatedServer:
-    max_count = 10
+    max_count = 3
     global_weight = None
     local_weights = []
     current_count = 0
@@ -18,8 +18,8 @@ class FederatedServer:
     @classmethod
     def update(cls, local_weight):
         weight_list = []
-        for i in range(4):  #todo check layer 갯수
-            temp = np.array(local_weight[i], dtype=np.float32)
+        for i in range(len(local_weight)): #range(4):  #todo check layer 갯수
+            temp = np.array(local_weight[i])
             weight_list.append(temp)
 
         cls.current_count += 1
@@ -41,15 +41,15 @@ class FederatedServer:
 
         temp_weight = cls.local_weights.pop()   #   weight의 shape를 모르므로, 하나를 꺼내어 사용
 
-        for i in range(4):  #todo check layer 갯수
-            temp = np.array(temp_weight[i], dtype=np.float32)
+        for i in range(len(temp_weight)):  #todo check layer 갯수
+            temp = np.array(temp_weight[i])
             temp_list.append(temp)
 
         temp_list = np.array(temp_list)
         
         for i in range(len(cls.local_weights)):
             for j in range(len(cls.local_weights[i])):
-                temp = np.array(cls.local_weights[i][j], dtype=np.float32)
+                temp = np.array(cls.local_weights[i][j])
                 temp_list[j] += temp
 
 
