@@ -22,6 +22,15 @@ def round(request):
     #logger.info("request round")
     return HttpResponse(FederatedServer.get_current_round(), status.HTTP_200_OK)
 
+@api_view(['GET', 'POST'])
+def client_count(request, count = 1):
+    if request.method == 'GET':
+        return HttpResponse("client_count get OK : {}".format(FederatedServer.get_client_count()), status.HTTP_200_OK)
+    elif request.method == 'POST':
+        FederatedServer.set_client_count(count)
+        return HttpResponse("client_count post OK : {}".format(FederatedServer.get_client_count()), status.HTTP_200_OK)
+
+
 @api_view(['GET', 'PUT'])
 def weight(request):
     if request.method == 'GET':
@@ -38,3 +47,14 @@ def weight(request):
     else :
         #print("request OTHER weight")
         return HttpResponse("Request OK", status.HTTP_200_OK)
+
+@api_view(['POST'])
+def reset(request):
+    FederatedServer.reset_parm()
+    return HttpResponse("Reset OK", status.HTTP_200_OK)
+
+@api_view(['GET'])
+def all_params(request):
+    params = {"client_count": FederatedServer.max_count,
+              "global_round": FederatedServer.current_round}
+    return HttpResponse("All Params: {}".format(params), status.HTTP_200_OK)

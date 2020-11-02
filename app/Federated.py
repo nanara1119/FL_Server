@@ -67,3 +67,19 @@ class FederatedServer:
     @classmethod
     def get_current_round(cls):
         return cls.current_round
+
+    @classmethod
+    def set_client_count(cls, count):
+        cls.max_count = count
+
+    @classmethod
+    def get_client_count(cls):
+        return cls.max_count
+
+    @classmethod
+    def reset_parm(cls):
+        cls.max_count = 3
+        cls.global_weight = None
+        cls.local_weights = []
+        cls.current_count = 0
+        cls.current_round = 0

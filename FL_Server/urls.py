@@ -23,6 +23,13 @@ urlpatterns = [
     path('index', views.index),
     path('admin/', admin.site.urls),
     path('round', views.round),
+    path('client_count', views.client_count),
+    path('client_count/', views.client_count),
+    path('client_count/<int:count>', views.client_count),
     path('weight', views.weight),
-    path('weight/', views.weight)
+    path('weight/', views.weight),
+    path('reset', views.reset),
+    path('reset/', views.reset),
+    path('params', views.all_params),
+    path('params/', views.all_params)
 ]
