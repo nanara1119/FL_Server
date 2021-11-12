@@ -39,4 +39,17 @@ exclude file & folder
 - request global weight</li>
 <li>[put] /weight <br>
 - update local weight</li>
+
+Admin API 
+<li>[get] /client_count <br>
+- request current max clinet number</li>
+
+<li>[post] /client_count/{count} <br>
+- set max client number</li>
+
+<li>[POST] /reset <br>
+- current environment variables initialize</li>
+
+<li>[get] /params <br>
+- request current environment variables</li>
 </ol>
